@@ -1,11 +1,13 @@
 const CACHE_NAME = 'movement-tracker-v1';
 
+// Use relative URLs so the SW works on any deployment path
+// (e.g. GitHub Pages at /repo-name/ or a custom domain at /)
 const APP_SHELL = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.json',
+  './',
+  './index.html',
+  './styles.css',
+  './app.js',
+  './manifest.json',
 ];
 
 // Install: cache the app shell

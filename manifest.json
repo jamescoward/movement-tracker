@@ -2,7 +2,7 @@
   "name": "Baby Movement Tracker",
   "short_name": "Movements",
   "description": "Track your baby's movements and build a personal baseline throughout pregnancy.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#7a9e87",
   "background_color": "#faf7f2",
