@@ -131,6 +131,213 @@ nav a[aria-current="page"] {
 }
 
 /* =============================================
+   Log Section
+   ============================================= */
+
+.log-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Timestamp */
+.timestamp-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.timestamp-group label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+#movement-time {
+  flex: 1;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+/* Flag toggles */
+.flags-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.flags-group legend {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.flags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.flag-toggle {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 100px;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  min-height: 44px;
+}
+
+.flag-toggle--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+/* Notes */
+.notes-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.notes-group label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.label-optional {
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+#movement-notes {
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+  resize: vertical;
+  min-height: 72px;
+}
+
+/* Log button */
+.log-btn {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  min-height: 56px;
+  transition: background var(--transition-fast);
+}
+
+.log-btn:active {
+  background: var(--color-primary-dark);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: calc(var(--nav-height) + var(--space-md));
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  z-index: 200;
+  animation: toast-in 0.2s ease;
+}
+
+.toast[hidden] {
+  display: none;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Recent movements */
+.recent-section {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.recent-section h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.movements-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.movement-item {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.movement-time {
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.movement-flags {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.movement-notes {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  width: 100%;
+}
+
+.empty-state {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-lg) 0;
+}
+
+/* =============================================
    Responsive
    ============================================= */
 

@@ -18,7 +18,41 @@
   </header>
 
   <main id="main-content">
-    <p>Welcome. Tap <strong>Log</strong> whenever your baby moves.</p>
+
+    <section class="log-section" aria-label="Log a movement">
+
+      <div class="timestamp-group">
+        <label for="movement-time">Time</label>
+        <input type="time" id="movement-time" name="movement-time" />
+      </div>
+
+      <fieldset class="flags-group">
+        <legend>Context</legend>
+        <div class="flags-grid">
+          <button type="button" class="flag-toggle" data-flag="justEaten" aria-pressed="false">Just eaten</button>
+          <button type="button" class="flag-toggle" data-flag="crunchedUp" aria-pressed="false">Crunched up</button>
+          <button type="button" class="flag-toggle" data-flag="listeningToMusic" aria-pressed="false">Listening to music</button>
+          <button type="button" class="flag-toggle" data-flag="resting" aria-pressed="false">Resting</button>
+          <button type="button" class="flag-toggle" data-flag="active" aria-pressed="false">Active</button>
+        </div>
+      </fieldset>
+
+      <div class="notes-group">
+        <label for="movement-notes">Notes <span class="label-optional">(optional)</span></label>
+        <textarea id="movement-notes" name="notes" placeholder="Any other context…" rows="2"></textarea>
+      </div>
+
+      <button type="button" id="log-movement-btn" class="log-btn">Log Movement</button>
+
+    </section>
+
+    <div id="save-toast" class="toast" role="status" aria-live="polite" hidden>Movement logged</div>
+
+    <section class="recent-section" aria-label="Recent movements">
+      <h2>Today</h2>
+      <ul id="recent-movements" class="movements-list"></ul>
+    </section>
+
   </main>
 
   <nav aria-label="Main navigation">
@@ -37,5 +71,6 @@
   </nav>
 
   <script src="app.js"></script>
+  <script src="log.js"></script>
 </body>
 </html>

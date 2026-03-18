@@ -70,19 +70,19 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
   - `importData(json)`
 - [x] Add storage capacity check and warning when approaching limits
 
-#### Sprint 1.3 — Movement Logging UI
+#### Sprint 1.3 — Movement Logging UI ✅ COMPLETE
 
-- [ ] "Log Movement" button — prominent, easy to tap one-handed
-- [ ] Timestamp defaults to now, with an adjuster (time picker) to correct if needed
-- [ ] Contextual flag toggles (pill/chip style):
+- [x] "Log Movement" button — prominent, easy to tap one-handed
+- [x] Timestamp defaults to now, with an adjuster (time picker) to correct if needed
+- [x] Contextual flag toggles (pill/chip style):
   - Just eaten
   - Crunched up
   - Listening to music
   - Resting
   - Active/moving around
-- [ ] Optional free-text notes field
-- [ ] Save confirmation (subtle animation/toast, not a modal)
-- [ ] Recent movements list on the home screen (today's log)
+- [x] Optional free-text notes field
+- [x] Save confirmation (subtle animation/toast, not a modal)
+- [x] Recent movements list on the home screen (today's log)
 
 ---
 
