@@ -1,0 +1,197 @@
+# Baby Movement Tracker — Project Plan
+
+## Overview
+
+A progressive web app (PWA) for tracking baby movements (kicks) throughout the day. The app builds a personal baseline over ~7 days so parents can recognise what's normal for their baby, rather than relying on memory alone. Movements are logged with contextual flags (just eaten, crunched up, listening to music, etc.) and visualised as a heat map and daily charts.
+
+## Tech Stack
+
+- **Frontend:** HTML, CSS, vanilla JavaScript (or lightweight framework like Preact if complexity warrants it later)
+- **Storage:** localStorage (with IndexedDB as a future upgrade path)
+- **Deployment:** Static files, installable as a PWA via service worker + web app manifest
+- **Design:** Muted, calming colour palette — no baby blue or pink. Think warm neutrals, sage greens, soft lavenders, muted teals.
+
+## Data Safety Note (localStorage / PWA)
+
+localStorage is tied to the browser origin and persists until explicitly cleared. Risks to be aware of:
+
+- **Clearing browser data** wipes localStorage — users should be warned and offered an export option.
+- **Private/incognito mode** may not persist data across sessions.
+- **Storage limits** are typically 5–10 MB per origin, which is plenty for movement logs.
+- **No encryption by default** — data is readable by any JS on the same origin. We'll be the only script, so this is low risk, but the app should never be hosted on a shared origin.
+- **Device loss/damage** means data loss without a backup. An export-to-file feature (JSON/CSV) is planned to mitigate this.
+
+Overall: perfectly adequate for a personal tracking tool, especially with an export/backup feature.
+
+---
+
+## Phases & Sprints
+
+Each sprint is scoped so a single agent can pick it up independently. Sprints within a phase can generally run in sequence; phases build on each other.
+
+---
+
+### Phase 1 — Foundation
+
+> Get the core infrastructure and a working movement logger in place.
+
+#### Sprint 1.1 — Project Scaffolding
+
+- [ ] Initialise project structure: `index.html`, `styles.css`, `app.js`
+- [ ] Set up PWA manifest (`manifest.json`) with app name, icons placeholder, theme colour
+- [ ] Create a basic service worker for offline caching (cache-first for app shell)
+- [ ] Define the colour palette and CSS custom properties (muted/calming, no blue/pink)
+- [ ] Basic responsive layout shell (header, main content area, nav stub)
+
+#### Sprint 1.2 — Data Layer
+
+- [ ] Design the movement record schema:
+  ```json
+  {
+    "id": "uuid",
+    "timestamp": "ISO-8601",
+    "flags": {
+      "justEaten": false,
+      "crunchedUp": false,
+      "listeningToMusic": false,
+      "resting": false,
+      "active": false
+    },
+    "notes": ""
+  }
+  ```
+- [ ] Build a storage abstraction module (`storage.js`) wrapping localStorage
+  - `saveMovement(record)`
+  - `getMovements(dateRange?)`
+  - `deleteMovement(id)`
+  - `exportData()` → JSON string
+  - `importData(json)`
+- [ ] Add storage capacity check and warning when approaching limits
+
+#### Sprint 1.3 — Movement Logging UI
+
+- [ ] "Log Movement" button — prominent, easy to tap one-handed
+- [ ] Timestamp defaults to now, with an adjuster (time picker) to correct if needed
+- [ ] Contextual flag toggles (pill/chip style):
+  - Just eaten
+  - Crunched up
+  - Listening to music
+  - Resting
+  - Active/moving around
+- [ ] Optional free-text notes field
+- [ ] Save confirmation (subtle animation/toast, not a modal)
+- [ ] Recent movements list on the home screen (today's log)
+
+---
+
+### Phase 2 — Visualisation
+
+> Show logged data as a simple daily chart.
+
+#### Sprint 2.1 — Daily Movement Chart
+
+- [ ] Day view: vertical timeline or bar chart showing movements across 24 hours
+- [ ] Each movement shown as a mark/dot on the timeline
+- [ ] Colour-code or icon-mark movements that have flags
+- [ ] Day navigation (previous/next day, date picker)
+- [ ] Empty state for days with no data
+
+#### Sprint 2.2 — Weekly Summary View
+
+- [ ] 7-day grid/row view showing movement counts per day
+- [ ] Tap a day to drill into the daily view
+- [ ] Visual indicator for days with notably fewer movements than the emerging average
+
+---
+
+### Phase 3 — Baseline & Pattern Detection
+
+> After ~7 days of data, surface the user's personal baseline.
+
+#### Sprint 3.1 — Baseline Calculation
+
+- [ ] Calculate hourly movement averages across the baseline period (first 7+ days)
+- [ ] Store the baseline profile (can be recalculated on demand)
+- [ ] Allow user to set/reset the baseline period
+
+#### Sprint 3.2 — Heat Map
+
+- [ ] Hour-of-day × day-of-week heat map showing movement density
+- [ ] Colour intensity mapped to movement frequency
+- [ ] Overlay flag frequency (e.g. "most kicks after eating happen at 2pm")
+
+#### Sprint 3.3 — Deviation Alerts
+
+- [ ] Compare today's movements against the baseline
+- [ ] Gentle, non-alarming notice if movements are notably below baseline
+- [ ] Clear disclaimer: this is a personal pattern tool, not medical advice — always contact your midwife/doctor if concerned
+
+---
+
+### Phase 4 — Data Management & Polish
+
+> Export, import, and overall UX polish.
+
+#### Sprint 4.1 — Export & Import
+
+- [ ] Export all data as JSON file download
+- [ ] Import from JSON file (with validation and merge/overwrite options)
+- [ ] CSV export for spreadsheet use
+
+#### Sprint 4.2 — Settings & Preferences
+
+- [ ] Customisable flag list (add/remove/rename flags)
+- [ ] Reminder notifications (if notification permission granted)
+- [ ] Dark/light mode toggle (both within the muted palette)
+
+#### Sprint 4.3 — PWA Polish
+
+- [ ] Proper app icons (multiple sizes)
+- [ ] Splash screen
+- [ ] Offline-first UX messaging
+- [ ] Install prompt handling
+- [ ] Lighthouse audit pass (PWA, accessibility, performance)
+
+---
+
+### Phase 5 — Extended Features (Future)
+
+> Ideas for after the core is solid. Not scheduled into sprints yet.
+
+- Shareable summary (generate an image or PDF of weekly report)
+- Partner/co-parent view (shared data via simple sync or file sharing)
+- Contraction timer (separate mode)
+- Integration with health apps (if APIs permit)
+- See `ideas.md` for chart and visualisation ideas
+
+---
+
+## Sprint Dependency Map
+
+```
+1.1 Scaffolding
+ └─► 1.2 Data Layer
+      └─► 1.3 Logging UI
+           ├─► 2.1 Daily Chart
+           │    └─► 2.2 Weekly Summary
+           │         └─► 3.1 Baseline Calc
+           │              ├─► 3.2 Heat Map
+           │              └─► 3.3 Deviation Alerts
+           └─► 4.1 Export/Import (can start after 1.3)
+                └─► 4.2 Settings
+                     └─► 4.3 PWA Polish
+```
+
+Sprints 4.1–4.3 can run in parallel with Phase 3 since they don't depend on baseline features.
+
+---
+
+## Design Direction
+
+| Element         | Approach                                                     |
+|-----------------|--------------------------------------------------------------|
+| Palette         | Warm neutrals, sage green, soft lavender, muted teal, cream  |
+| Typography      | Clean sans-serif, generous spacing, large tap targets         |
+| Tone            | Calm, reassuring, never clinical or alarming                  |
+| Animations      | Subtle, purposeful (save confirmations, transitions)          |
+| Accessibility   | High contrast ratios within muted palette, screen reader support |
