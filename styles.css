@@ -338,6 +338,135 @@ nav a[aria-current="page"] {
 }
 
 /* =============================================
+   Screen-reader only utility
+   ============================================= */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* =============================================
+   Daily Chart (Sprint 2.1)
+   ============================================= */
+
+.chart-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Day navigation row */
+.chart-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.nav-btn {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  transition: background var(--transition-fast);
+}
+
+.nav-btn:active {
+  background: var(--color-border);
+}
+
+.chart-date-label {
+  flex: 1;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Date picker row */
+.chart-date-picker-row {
+  display: flex;
+  justify-content: center;
+}
+
+.chart-date-input {
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+/* 24-hour timeline container */
+.daily-chart {
+  position: relative;
+  min-height: 480px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.timeline {
+  position: relative;
+  width: 100%;
+  height: 480px;
+}
+
+/* Movement dots */
+.movement-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-primary-dark);
+  cursor: default;
+  transition: transform var(--transition-fast);
+}
+
+.movement-dot:hover {
+  transform: translateX(-50%) scale(1.35);
+}
+
+/* Flagged movements use accent colour */
+.movement-dot--flagged {
+  background: var(--color-accent);
+  border-color: #7a6b9b;
+}
+
+/* Empty state */
+.chart-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* =============================================
    Responsive
    ============================================= */
 
