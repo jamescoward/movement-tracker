@@ -125,7 +125,11 @@ function _bindFlagToggles() {
 // ─── Browser initialisation ───────────────────────────────────────────────────
 
 if (typeof window !== 'undefined' && typeof module === 'undefined') {
-  window.addEventListener('DOMContentLoaded', initLogForm);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLogForm);
+  } else {
+    initLogForm();
+  }
 }
 
 if (typeof module !== 'undefined') {
