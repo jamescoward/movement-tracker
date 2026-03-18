@@ -39,15 +39,15 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 
 #### Sprint 1.1 — Project Scaffolding
 
-- [ ] Initialise project structure: `index.html`, `styles.css`, `app.js`
-- [ ] Set up PWA manifest (`manifest.json`) with app name, icons placeholder, theme colour
-- [ ] Create a basic service worker for offline caching (cache-first for app shell)
-- [ ] Define the colour palette and CSS custom properties (muted/calming, no blue/pink)
-- [ ] Basic responsive layout shell (header, main content area, nav stub)
+- [x] Initialise project structure: `index.html`, `styles.css`, `app.js`
+- [x] Set up PWA manifest (`manifest.json`) with app name, icons placeholder, theme colour
+- [x] Create a basic service worker for offline caching (cache-first for app shell)
+- [x] Define the colour palette and CSS custom properties (muted/calming, no blue/pink)
+- [x] Basic responsive layout shell (header, main content area, nav stub)
 
-#### Sprint 1.2 — Data Layer
+#### Sprint 1.2 — Data Layer ✅ COMPLETE
 
-- [ ] Design the movement record schema:
+- [x] Design the movement record schema:
   ```json
   {
     "id": "uuid",
@@ -62,13 +62,13 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
     "notes": ""
   }
   ```
-- [ ] Build a storage abstraction module (`storage.js`) wrapping localStorage
+- [x] Build a storage abstraction module (`storage.js`) wrapping localStorage
   - `saveMovement(record)`
   - `getMovements(dateRange?)`
   - `deleteMovement(id)`
   - `exportData()` → JSON string
   - `importData(json)`
-- [ ] Add storage capacity check and warning when approaching limits
+- [x] Add storage capacity check and warning when approaching limits
 
 #### Sprint 1.3 — Movement Logging UI
 
