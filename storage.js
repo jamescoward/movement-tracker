@@ -86,4 +86,7 @@ function checkStorageCapacity() {
 
 if (typeof module !== 'undefined') {
   module.exports = { saveMovement, getMovements, deleteMovement, exportData, importData, checkStorageCapacity };
+} else {
+  // Browser: expose as globals so log.js can pick them up
+  Object.assign(window, { saveMovement, getMovements, deleteMovement, exportData, importData, checkStorageCapacity });
 }

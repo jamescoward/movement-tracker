@@ -1,6 +1,8 @@
 'use strict';
 
-const { saveMovement, getMovements } = require('./storage.js');
+const { saveMovement, getMovements } = typeof require !== 'undefined'
+  ? require('./storage.js')
+  : window;
 
 // ─── Public API ───────────────────────────────────────────────────────────────
 
@@ -126,4 +128,6 @@ if (typeof window !== 'undefined' && typeof module === 'undefined') {
   window.addEventListener('DOMContentLoaded', initLogForm);
 }
 
-module.exports = { initLogForm, handleSave, showToast, renderRecentMovements };
+if (typeof module !== 'undefined') {
+  module.exports = { initLogForm, handleSave, showToast, renderRecentMovements };
+}
