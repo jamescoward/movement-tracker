@@ -2,7 +2,9 @@
 
 ## Overview
 
-A progressive web app (PWA) for tracking baby movements (kicks) throughout the day. The app builds a personal baseline over ~7 days so parents can recognise what's normal for their baby, rather than relying on memory alone. Movements are logged with contextual flags (just eaten, crunched up, listening to music, etc.) and visualised as a heat map and daily charts.
+A progressive web app (PWA) for tracking baby movements (kicks) throughout the day. The app helps parents keep a clear, visual record of movements and the context around them — rather than relying on memory alone. Movements are logged with contextual flags (just eaten, crunched up, listening to music, etc.) and visualised as a heat map and daily charts.
+
+**Important principle:** This app is a **recording and visualisation tool only**. It does not make diagnostic predictions, flag anomalies, or tell the user whether their baby's movements are "normal" or not. That judgement belongs to the parent and their medical team. The app simply makes the data easier to see and recall.
 
 ## Tech Stack
 
@@ -100,31 +102,26 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 
 - [ ] 7-day grid/row view showing movement counts per day
 - [ ] Tap a day to drill into the daily view
-- [ ] Visual indicator for days with notably fewer movements than the emerging average
+- [ ] Simple movement count per day — no judgement indicators, just the data
 
 ---
 
-### Phase 3 — Baseline & Pattern Detection
+### Phase 3 — Pattern Visualisation
 
-> After ~7 days of data, surface the user's personal baseline.
+> After ~7 days of data, help the user *see* their own patterns. No interpretation, no alerts — just a clearer picture.
 
-#### Sprint 3.1 — Baseline Calculation
-
-- [ ] Calculate hourly movement averages across the baseline period (first 7+ days)
-- [ ] Store the baseline profile (can be recalculated on demand)
-- [ ] Allow user to set/reset the baseline period
-
-#### Sprint 3.2 — Heat Map
+#### Sprint 3.1 — Heat Map
 
 - [ ] Hour-of-day × day-of-week heat map showing movement density
 - [ ] Colour intensity mapped to movement frequency
-- [ ] Overlay flag frequency (e.g. "most kicks after eating happen at 2pm")
+- [ ] Overlay flag frequency (e.g. show that post-meal kicks tend to cluster at certain times)
+- [ ] The user draws their own conclusions — the app just presents the data
 
-#### Sprint 3.3 — Deviation Alerts
+#### Sprint 3.2 — Flag Correlation View
 
-- [ ] Compare today's movements against the baseline
-- [ ] Gentle, non-alarming notice if movements are notably below baseline
-- [ ] Clear disclaimer: this is a personal pattern tool, not medical advice — always contact your midwife/doctor if concerned
+- [ ] Simple breakdown: how often each flag is present when movements are logged
+- [ ] Side-by-side comparison (e.g. movements per hour on "just eaten" vs. not)
+- [ ] Purely observational — no "you should eat more" or similar suggestions
 
 ---
 
@@ -174,9 +171,8 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
       └─► 1.3 Logging UI
            ├─► 2.1 Daily Chart
            │    └─► 2.2 Weekly Summary
-           │         └─► 3.1 Baseline Calc
-           │              ├─► 3.2 Heat Map
-           │              └─► 3.3 Deviation Alerts
+           │         └─► 3.1 Heat Map
+           │              └─► 3.2 Flag Correlation View
            └─► 4.1 Export/Import (can start after 1.3)
                 └─► 4.2 Settings
                      └─► 4.3 PWA Polish
