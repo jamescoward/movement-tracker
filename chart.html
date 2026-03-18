@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Daily movement chart — Baby Movement Tracker" />
+  <meta name="theme-color" content="#7a9e87" />
+
+  <title>Daily Chart — Movement Tracker</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Movement Tracker</h1>
+  </header>
+
+  <main id="main-content">
+
+    <section class="chart-section" aria-label="Daily movement chart">
+
+      <div class="chart-nav" role="group" aria-label="Day navigation">
+        <button type="button" id="prev-day" class="nav-btn" aria-label="Previous day">&#8249;</button>
+        <span id="chart-date" class="chart-date-label" aria-live="polite"></span>
+        <button type="button" id="next-day" class="nav-btn" aria-label="Next day">&#8250;</button>
+      </div>
+
+      <div class="chart-date-picker-row">
+        <label for="chart-date-picker" class="sr-only">Jump to date</label>
+        <input type="date" id="chart-date-picker" class="chart-date-input" />
+      </div>
+
+      <div id="daily-chart" class="daily-chart" aria-label="Movement timeline" role="img"></div>
+
+    </section>
+
+  </main>
+
+  <nav aria-label="Main navigation">
+    <a href="/">
+      <span aria-hidden="true">📋</span>
+      Log
+    </a>
+    <a href="/chart.html" aria-current="page">
+      <span aria-hidden="true">📈</span>
+      Chart
+    </a>
+    <a href="/settings.html">
+      <span aria-hidden="true">⚙️</span>
+      Settings
+    </a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script src="storage.js"></script>
+  <script src="chart.js"></script>
+</body>
+</html>
