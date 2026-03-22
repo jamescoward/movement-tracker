@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Movement pattern heat map — Baby Movement Tracker" />
+  <meta name="theme-color" content="#7a9e87" />
+
+  <title>Heat Map — Movement Tracker</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Movement Tracker</h1>
+  </header>
+
+  <main id="main-content">
+
+    <section class="heatmap-section" aria-label="Movement heat map">
+
+      <div class="heatmap-controls">
+        <label for="flag-overlay-select">Filter by flag:</label>
+        <select id="flag-overlay-select">
+          <option value="">All movements</option>
+          <option value="justEaten">Just eaten</option>
+          <option value="crunchedUp">Crunched up</option>
+          <option value="listeningToMusic">Listening to music</option>
+          <option value="resting">Resting</option>
+          <option value="active">Active</option>
+        </select>
+      </div>
+
+      <div id="heatmap-grid" class="heatmap-grid" aria-label="Hour of day by day of week heat map"></div>
+
+      <div id="heatmap-legend" class="heatmap-legend"></div>
+
+    </section>
+
+  </main>
+
+  <nav aria-label="Main navigation">
+    <a href="./">
+      <span aria-hidden="true">📋</span>
+      Log
+    </a>
+    <a href="./chart.html">
+      <span aria-hidden="true">📈</span>
+      Chart
+    </a>
+    <a href="./week.html">
+      <span aria-hidden="true">📊</span>
+      Week
+    </a>
+    <a href="./heatmap.html" aria-current="page">
+      <span aria-hidden="true">🗓️</span>
+      Patterns
+    </a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script src="storage.js"></script>
+  <script src="heatmap.js"></script>
+</body>
+</html>

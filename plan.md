@@ -110,12 +110,12 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 
 > After ~7 days of data, help the user *see* their own patterns. No interpretation, no alerts — just a clearer picture.
 
-#### Sprint 3.1 — Heat Map
+#### Sprint 3.1 — Heat Map ✅ COMPLETE
 
-- [ ] Hour-of-day × day-of-week heat map showing movement density
-- [ ] Colour intensity mapped to movement frequency
-- [ ] Overlay flag frequency (e.g. show that post-meal kicks tend to cluster at certain times)
-- [ ] The user draws their own conclusions — the app just presents the data
+- [x] Hour-of-day × day-of-week heat map showing movement density
+- [x] Colour intensity mapped to movement frequency
+- [x] Overlay flag frequency (e.g. show that post-meal kicks tend to cluster at certain times)
+- [x] The user draws their own conclusions — the app just presents the data
 
 #### Sprint 3.2 — Flag Correlation View
 
