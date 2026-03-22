@@ -1,6 +1,6 @@
 'use strict';
 
-const { getMovements } = typeof require !== 'undefined'
+var _storage = typeof require !== 'undefined'
   ? require('./storage.js')
   : window;
 
@@ -36,7 +36,7 @@ function renderChart(dateStr) {
   const container = document.getElementById('daily-chart');
   if (!container) return;
 
-  const movements = getMovements().filter((m) => _localDateStr(m.timestamp) === dateStr);
+  const movements = _storage.getMovements().filter((m) => _localDateStr(m.timestamp) === dateStr);
 
   if (movements.length === 0) {
     container.innerHTML = '<p class="chart-empty">No movements logged for this day.</p>';
