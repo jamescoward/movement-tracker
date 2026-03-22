@@ -46,6 +46,22 @@ function renderChart(dateStr) {
   const timeline = document.createElement('div');
   timeline.className = 'timeline';
 
+  // Add hour gridlines and labels
+  for (let h = 0; h < 24; h++) {
+    const pct = ((h / 24) * 100).toFixed(2);
+
+    const line = document.createElement('div');
+    line.className = 'hour-line';
+    line.style.top = `${pct}%`;
+
+    const label = document.createElement('span');
+    label.className = 'hour-label';
+    label.textContent = `${String(h).padStart(2, '0')}:00`;
+    line.appendChild(label);
+
+    timeline.appendChild(line);
+  }
+
   movements.forEach((m) => {
     const dot = document.createElement('div');
     dot.className = 'movement-dot';
