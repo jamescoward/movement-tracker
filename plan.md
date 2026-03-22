@@ -90,13 +90,13 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 
 > Show logged data as a simple daily chart.
 
-#### Sprint 2.1 — Daily Movement Chart
+#### Sprint 2.1 — Daily Movement Chart ✅ COMPLETE
 
-- [ ] Day view: vertical timeline or bar chart showing movements across 24 hours
-- [ ] Each movement shown as a mark/dot on the timeline
-- [ ] Colour-code or icon-mark movements that have flags
-- [ ] Day navigation (previous/next day, date picker)
-- [ ] Empty state for days with no data
+- [x] Day view: vertical timeline or bar chart showing movements across 24 hours
+- [x] Each movement shown as a mark/dot on the timeline
+- [x] Colour-code or icon-mark movements that have flags
+- [x] Day navigation (previous/next day, date picker)
+- [x] Empty state for days with no data
 
 #### Sprint 2.2 — Weekly Summary View
 
