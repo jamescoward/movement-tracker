@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Movement pattern heat map — Baby Movement Tracker" />
+  <meta name="description" content="Flag correlation view — Baby Movement Tracker" />
   <meta name="theme-color" content="#7a9e87" />
 
-  <title>Heat Map — Movement Tracker</title>
+  <title>Flag Correlation — Movement Tracker</title>
 
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="styles.css" />
@@ -19,12 +19,18 @@
 
   <main id="main-content">
 
-    <section class="heatmap-section" aria-label="Movement heat map">
+    <section class="correlation-section" aria-label="Flag correlation view">
 
-      <div class="heatmap-controls">
-        <label for="flag-overlay-select">Filter by flag:</label>
-        <select id="flag-overlay-select">
-          <option value="">All movements</option>
+      <h2 class="section-heading">Flag Breakdown</h2>
+      <p class="section-description">How often each flag is present when movements are logged.</p>
+      <div id="correlation-breakdown" class="correlation-breakdown"></div>
+
+      <h2 class="section-heading">Hourly Comparison</h2>
+      <p class="section-description">Movements per hour — with flag vs. without.</p>
+
+      <div class="correlation-controls">
+        <label for="flag-select">Compare flag:</label>
+        <select id="flag-select">
           <option value="justEaten">Just eaten</option>
           <option value="crunchedUp">Crunched up</option>
           <option value="listeningToMusic">Listening to music</option>
@@ -33,9 +39,7 @@
         </select>
       </div>
 
-      <div id="heatmap-grid" class="heatmap-grid" aria-label="Hour of day by day of week heat map"></div>
-
-      <div id="heatmap-legend" class="heatmap-legend"></div>
+      <div id="correlation-comparison" class="correlation-comparison"></div>
 
     </section>
 
@@ -54,11 +58,11 @@
       <span aria-hidden="true">📊</span>
       Week
     </a>
-    <a href="./heatmap.html" aria-current="page">
+    <a href="./heatmap.html">
       <span aria-hidden="true">🗓️</span>
       Patterns
     </a>
-    <a href="./correlation.html">
+    <a href="./correlation.html" aria-current="page">
       <span aria-hidden="true">🔗</span>
       Flags
     </a>
@@ -70,6 +74,6 @@
 
   <script src="app.js"></script>
   <script src="storage.js"></script>
-  <script src="heatmap.js"></script>
+  <script src="correlation.js"></script>
 </body>
 </html>

@@ -38,7 +38,7 @@ jobs:
       - name: Collect web files
         run: |
           mkdir dist
-          cp index.html styles.css app.js storage.js log.js chart.html chart.js week.html week.js heatmap.html heatmap.js manifest.json sw.js dist/
+          cp index.html styles.css app.js storage.js log.js chart.html chart.js week.html week.js heatmap.html heatmap.js correlation.html correlation.js settings.html data-io.js manifest.json sw.js dist/
           # Copy icons folder when it exists
           if [ -d icons ]; then cp -r icons dist/; fi
 
