@@ -996,6 +996,111 @@ nav a[aria-current="page"] {
   }
 }
 
+/* =============================================
+   Dark Mode (Sprint 4.2)
+   ============================================= */
+
+.dark-mode {
+  --color-bg:          #1e1c1a;
+  --color-surface:     #2a2725;
+  --color-primary:     #8fb89a;
+  --color-primary-dark:#6f9a7a;
+  --color-accent:      #b0a3c4;
+  --color-teal:        #82b8b3;
+  --color-text:        #e8e2da;
+  --color-text-muted:  #a69e96;
+  --color-border:      #3d3835;
+}
+
+/* =============================================
+   Custom flags list (Sprint 4.2)
+   ============================================= */
+
+.custom-flags-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.flag-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.flag-label {
+  flex: 1;
+  font-size: 0.9375rem;
+}
+
+.rename-flag-btn,
+.remove-flag-btn {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-family: inherit;
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  min-height: 2rem;
+  transition: background var(--transition-fast);
+}
+
+.rename-flag-btn:hover,
+.remove-flag-btn:hover {
+  background: var(--color-border);
+}
+
+.add-flag-group {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.add-flag-group input[type="text"] {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+}
+
+/* =============================================
+   Reminder settings (Sprint 4.2)
+   ============================================= */
+
+.reminder-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.reminder-group label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.reminder-group input[type="time"] {
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-xs) var(--space-sm);
+}
+
 @media (min-width: 900px) {
   nav {
     /* On wider screens nav could move to a sidebar in future sprints */

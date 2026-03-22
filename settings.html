@@ -48,6 +48,35 @@
       <button type="button" id="import-btn" class="settings-btn">Import</button>
     </section>
 
+    <section class="settings-section" aria-label="Custom flags">
+      <h2>Custom Flags</h2>
+      <p class="settings-description">Add, remove, or rename the context flags shown when logging movements.</p>
+      <ul id="custom-flags-list" class="custom-flags-list"></ul>
+      <div class="add-flag-group">
+        <input type="text" id="new-flag-input" placeholder="New flag name" />
+        <button type="button" id="add-flag-btn" class="settings-btn">Add flag</button>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-label="Reminders">
+      <h2>Reminders</h2>
+      <p class="settings-description">Get a daily reminder to log movements.</p>
+      <div class="reminder-group">
+        <label for="reminder-toggle">Enable reminders</label>
+        <input type="checkbox" id="reminder-toggle" />
+      </div>
+      <div class="reminder-group">
+        <label for="reminder-time">Reminder time</label>
+        <input type="time" id="reminder-time" value="09:00" />
+      </div>
+    </section>
+
+    <section class="settings-section" aria-label="Appearance">
+      <h2>Appearance</h2>
+      <p class="settings-description">Toggle between light and dark mode.</p>
+      <button type="button" id="dark-mode-toggle" class="settings-btn settings-btn--secondary">Toggle dark mode</button>
+    </section>
+
     <div id="save-toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   </main>
@@ -82,5 +111,6 @@
   <script src="app.js"></script>
   <script src="storage.js"></script>
   <script src="data-io.js"></script>
+  <script src="settings.js"></script>
 </body>
 </html>

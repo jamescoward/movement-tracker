@@ -38,11 +38,10 @@ describe('index.html — logging UI structure', () => {
     expect(el.getAttribute('type')).toBe('time');
   });
 
-  test('has flag toggles for all 5 flags', () => {
-    const flags = ['justEaten', 'crunchedUp', 'listeningToMusic', 'resting', 'active'];
-    flags.forEach((flag) => {
-      expect(htmlDoc.querySelectorAll(`[data-flag="${flag}"]`).length).toBeGreaterThan(0);
-    });
+  test('has a flags-grid container for dynamic flag rendering', () => {
+    const grid = htmlDoc.getElementById('flags-grid');
+    expect(grid).not.toBeNull();
+    expect(grid.className).toContain('flags-grid');
   });
 
   test('has a notes textarea #movement-notes', () => {
