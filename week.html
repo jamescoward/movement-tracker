@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Weekly movement summary — Baby Movement Tracker" />
+  <meta name="theme-color" content="#7a9e87" />
+
+  <title>Weekly Summary — Movement Tracker</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Movement Tracker</h1>
+  </header>
+
+  <main id="main-content">
+
+    <section class="week-section" aria-label="Weekly movement summary">
+
+      <div class="week-nav" role="group" aria-label="Week navigation">
+        <button type="button" id="prev-week" class="nav-btn" aria-label="Previous week">&#8249;</button>
+        <span id="week-label" class="week-label" aria-live="polite"></span>
+        <button type="button" id="next-week" class="nav-btn" aria-label="Next week">&#8250;</button>
+      </div>
+
+      <div id="weekly-grid" class="weekly-grid" aria-label="Weekly movement counts"></div>
+
+    </section>
+
+  </main>
+
+  <nav aria-label="Main navigation">
+    <a href="./">
+      <span aria-hidden="true">📋</span>
+      Log
+    </a>
+    <a href="./chart.html">
+      <span aria-hidden="true">📈</span>
+      Chart
+    </a>
+    <a href="./week.html" aria-current="page">
+      <span aria-hidden="true">📊</span>
+      Week
+    </a>
+    <a href="./settings.html">
+      <span aria-hidden="true">⚙️</span>
+      Settings
+    </a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script src="storage.js"></script>
+  <script src="week.js"></script>
+</body>
+</html>

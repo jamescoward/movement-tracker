@@ -11,6 +11,8 @@ const APP_SHELL = [
   './log.js',
   './chart.html',
   './chart.js',
+  './week.html',
+  './week.js',
   './manifest.json',
 ];
 
