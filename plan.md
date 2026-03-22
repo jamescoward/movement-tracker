@@ -129,11 +129,11 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 
 > Export, import, and overall UX polish.
 
-#### Sprint 4.1 — Export & Import
+#### Sprint 4.1 — Export & Import ✅ COMPLETE
 
-- [ ] Export all data as JSON file download
-- [ ] Import from JSON file (with validation and merge/overwrite options)
-- [ ] CSV export for spreadsheet use
+- [x] Export all data as JSON file download
+- [x] Import from JSON file (with validation and merge/overwrite options)
+- [x] CSV export for spreadsheet use
 
 #### Sprint 4.2 — Settings & Preferences
 
