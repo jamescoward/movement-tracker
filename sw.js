@@ -1,4 +1,4 @@
-const CACHE_NAME = 'movement-tracker-v2';
+const CACHE_NAME = 'movement-tracker-v3';
 
 // Use relative URLs so the SW works on any deployment path
 // (e.g. GitHub Pages at /repo-name/ or a custom domain at /)
@@ -9,6 +9,10 @@ const APP_SHELL = [
   './app.js',
   './storage.js',
   './log.js',
+  './chart.html',
+  './chart.js',
+  './week.html',
+  './week.js',
   './manifest.json',
 ];
 
