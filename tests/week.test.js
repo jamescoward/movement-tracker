@@ -59,7 +59,7 @@ describe('week.html — structure', () => {
     const links = Array.from(htmlDoc.querySelectorAll('nav a'));
     const hrefs = links.map((a) => a.getAttribute('href'));
     expect(hrefs.some((h) => h.includes('chart'))).toBe(true);
-    expect(hrefs.some((h) => h === '/')).toBe(true);
+    expect(hrefs.some((h) => h === './')).toBe(true);
   });
 });
 
