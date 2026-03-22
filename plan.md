@@ -98,11 +98,11 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 - [x] Day navigation (previous/next day, date picker)
 - [x] Empty state for days with no data
 
-#### Sprint 2.2 — Weekly Summary View
+#### Sprint 2.2 — Weekly Summary View ✅ COMPLETE
 
-- [ ] 7-day grid/row view showing movement counts per day
-- [ ] Tap a day to drill into the daily view
-- [ ] Simple movement count per day — no judgement indicators, just the data
+- [x] 7-day grid/row view showing movement counts per day
+- [x] Tap a day to drill into the daily view
+- [x] Simple movement count per day — no judgement indicators, just the data
 
 ---
 
