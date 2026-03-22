@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Export and import your movement data." />
+  <meta name="theme-color" content="#7a9e87" />
+
+  <title>Settings — Baby Movement Tracker</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Settings</h1>
+  </header>
+
+  <main id="main-content">
+
+    <section class="settings-section" aria-label="Export data">
+      <h2>Export Data</h2>
+      <p class="settings-description">Download a backup of all your movement data.</p>
+      <div class="settings-actions">
+        <button type="button" id="export-json-btn" class="settings-btn">Export as JSON</button>
+        <button type="button" id="export-csv-btn" class="settings-btn settings-btn--secondary">Export as CSV</button>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-label="Import data">
+      <h2>Import Data</h2>
+      <p class="settings-description">Restore data from a previously exported JSON file.</p>
+
+      <div class="import-group">
+        <label for="import-file-input" class="import-label">Choose file</label>
+        <input type="file" id="import-file-input" accept=".json" />
+      </div>
+
+      <div class="import-group">
+        <label for="import-mode">Import mode</label>
+        <select id="import-mode">
+          <option value="merge">Merge (add new records, keep existing)</option>
+          <option value="overwrite">Overwrite (replace all data)</option>
+        </select>
+      </div>
+
+      <button type="button" id="import-btn" class="settings-btn">Import</button>
+    </section>
+
+    <div id="save-toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  </main>
+
+  <nav aria-label="Main navigation">
+    <a href="./">
+      <span aria-hidden="true">📋</span>
+      Log
+    </a>
+    <a href="./chart.html">
+      <span aria-hidden="true">📈</span>
+      Chart
+    </a>
+    <a href="./week.html">
+      <span aria-hidden="true">📊</span>
+      Week
+    </a>
+    <a href="./heatmap.html">
+      <span aria-hidden="true">🗓️</span>
+      Patterns
+    </a>
+    <a href="./settings.html" aria-current="page">
+      <span aria-hidden="true">⚙️</span>
+      Settings
+    </a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script src="storage.js"></script>
+  <script src="data-io.js"></script>
+</body>
+</html>

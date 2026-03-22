@@ -15,6 +15,8 @@ const APP_SHELL = [
   './week.js',
   './heatmap.html',
   './heatmap.js',
+  './settings.html',
+  './data-io.js',
   './manifest.json',
 ];
 
