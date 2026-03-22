@@ -460,13 +460,63 @@ nav a[aria-current="page"] {
   border-radius: 50%;
   background: var(--color-primary);
   border: 2px solid var(--color-primary-dark);
-  cursor: default;
+  cursor: pointer;
   transition: transform var(--transition-fast);
   z-index: 1;
 }
 
 .movement-dot:hover {
   transform: translateX(-50%) scale(1.35);
+}
+
+/* Movement popover */
+.movement-popover {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+  min-width: 10rem;
+  max-width: 16rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  z-index: 10;
+  white-space: normal;
+  text-align: left;
+}
+
+.popover-time {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.popover-flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.popover-flag {
+  font-size: 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 0.125rem var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.popover-notes {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-xs);
+  margin-top: var(--space-xs);
 }
 
 /* Flagged movements use accent colour */

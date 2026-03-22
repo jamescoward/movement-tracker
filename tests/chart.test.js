@@ -233,6 +233,98 @@ describe('chart.js — module', () => {
     });
   });
 
+  // ── movement popover ─────────────────────────────────────────────────────
+
+  describe('movement popover', () => {
+    test('clicking a dot shows a .movement-popover', () => {
+      storage.saveMovement({ timestamp: new Date(2024, 5, 15, 9, 30).toISOString() });
+      chart.initChart();
+      chart.renderChart('2024-06-15');
+      const dot = document.querySelector('.movement-dot');
+      dot.click();
+      const popover = document.querySelector('.movement-popover');
+      expect(popover).not.toBeNull();
+    });
+
+    test('popover shows the movement time', () => {
+      storage.saveMovement({ timestamp: new Date(2024, 5, 15, 9, 30).toISOString() });
+      chart.initChart();
+      chart.renderChart('2024-06-15');
+      document.querySelector('.movement-dot').click();
+      const popover = document.querySelector('.movement-popover');
+      expect(popover.textContent).toMatch(/9:30|09:30/);
+    });
+
+    test('popover shows active flags', () => {
+      storage.saveMovement({
+        timestamp: new Date(2024, 5, 15, 9, 0).toISOString(),
+        flags: { justEaten: true, crunchedUp: false, listeningToMusic: true, resting: false, active: false },
+      });
+      chart.initChart();
+      chart.renderChart('2024-06-15');
+      document.querySelector('.movement-dot').click();
+      const popover = document.querySelector('.movement-popover');
+      expect(popover.textContent).toMatch(/just eaten/i);
+      expect(popover.textContent).toMatch(/listening to music/i);
+      expect(popover.textContent).not.toMatch(/crunched up/i);
+    });
+
+    test('popover shows notes when present', () => {
+      storage.saveMovement({
+        timestamp: new Date(2024, 5, 15, 14, 0).toISOString(),
+        notes: 'Strong kicks after lunch',
+      });
+      chart.initChart();
+      chart.renderChart('2024-06-15');
+      document.querySelector('.movement-dot').click();
+      const popover = document.querySelector('.movement-popover');
+      expect(popover.textContent).toContain('Strong kicks after lunch');
+    });
+
+    test('popover does not show notes section when notes are empty', () => {
+      storage.saveMovement({ timestamp: new Date(2024, 5, 15, 14, 0).toISOString() });
+      chart.initChart();
+      chart.renderChart('2024-06-15');
+      document.querySelector('.movement-dot').click();
+      const notes = document.querySelector('.popover-notes');
+      expect(notes).toBeNull();
+    });
+
+    test('popover does not show flags section when no flags set', () => {
+      storage.saveMovement({
+        timestamp: new Date(2024, 5, 15, 14, 0).toISOString(),
+        flags: { justEaten: false, crunchedUp: false, listeningToMusic: false, resting: false, active: false },
+      });
+      chart.initChart();
+      chart.renderChart('2024-06-15');
+      document.querySelector('.movement-dot').click();
+      const flags = document.querySelector('.popover-flags');
+      expect(flags).toBeNull();
+    });
+
+    test('clicking a second dot replaces the first popover', () => {
+      storage.saveMovement({ timestamp: new Date(2024, 5, 15, 9, 0).toISOString() });
+      storage.saveMovement({ timestamp: new Date(2024, 5, 15, 14, 0).toISOString() });
+      chart.initChart();
+      chart.renderChart('2024-06-15');
+      const dots = document.querySelectorAll('.movement-dot');
+      dots[0].click();
+      dots[1].click();
+      const popovers = document.querySelectorAll('.movement-popover');
+      expect(popovers.length).toBe(1);
+    });
+
+    test('clicking outside the popover dismisses it', () => {
+      storage.saveMovement({ timestamp: new Date(2024, 5, 15, 9, 0).toISOString() });
+      chart.initChart();
+      chart.renderChart('2024-06-15');
+      document.querySelector('.movement-dot').click();
+      expect(document.querySelector('.movement-popover')).not.toBeNull();
+      document.body.click();
+      expect(document.querySelector('.movement-popover')).toBeNull();
+    });
+  });
+
   // ── date picker ───────────────────────────────────────────────────────────
 
   describe('date picker', () => {

@@ -76,6 +76,11 @@ function renderChart(dateStr) {
     dot.setAttribute('title', timeStr);
     dot.setAttribute('aria-label', `Movement at ${timeStr}`);
 
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      _showPopover(dot, m);
+    });
+
     timeline.appendChild(dot);
   });
 
@@ -94,6 +99,65 @@ function navigateDay(direction) {
   _currentDate = _localDateStr(d.toISOString());
   _updateUI();
   renderChart(_currentDate);
+}
+
+// ─── Popover ─────────────────────────────────────────────────────────────────
+
+const FLAG_LABELS = {
+  justEaten: 'Just eaten',
+  crunchedUp: 'Crunched up',
+  listeningToMusic: 'Listening to music',
+  resting: 'Resting',
+  active: 'Active',
+};
+
+function _dismissPopover() {
+  const existing = document.querySelector('.movement-popover');
+  if (existing) existing.remove();
+}
+
+function _showPopover(dot, movement) {
+  _dismissPopover();
+
+  const popover = document.createElement('div');
+  popover.className = 'movement-popover';
+
+  // Time
+  const timeStr = new Date(movement.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const timeEl = document.createElement('div');
+  timeEl.className = 'popover-time';
+  timeEl.textContent = timeStr;
+  popover.appendChild(timeEl);
+
+  // Flags (only if any are set)
+  if (movement.flags && _hasFlagSet(movement.flags)) {
+    const flagsEl = document.createElement('div');
+    flagsEl.className = 'popover-flags';
+    Object.entries(movement.flags).forEach(([key, val]) => {
+      if (val) {
+        const tag = document.createElement('span');
+        tag.className = 'popover-flag';
+        tag.textContent = FLAG_LABELS[key] || key;
+        flagsEl.appendChild(tag);
+      }
+    });
+    popover.appendChild(flagsEl);
+  }
+
+  // Notes (only if present)
+  if (movement.notes) {
+    const notesEl = document.createElement('div');
+    notesEl.className = 'popover-notes';
+    notesEl.textContent = movement.notes;
+    popover.appendChild(notesEl);
+  }
+
+  dot.appendChild(popover);
+}
+
+// Dismiss popover on outside click
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', _dismissPopover);
 }
 
 // ─── Private helpers ──────────────────────────────────────────────────────────
