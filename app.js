@@ -15,10 +15,12 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function highlightCurrentNav() {
-  const path = window.location.pathname;
+  const current = window.location.href;
   document.querySelectorAll('nav a').forEach((link) => {
-    if (link.getAttribute('href') === path) {
+    if (link.href === current) {
       link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
     }
   });
 }
