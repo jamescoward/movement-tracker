@@ -814,6 +814,166 @@ nav a[aria-current="page"] {
 .legend-cell[data-intensity="4"] { background: #3d8b3d; }
 
 /* =============================================
+   Flag Correlation (Sprint 3.2)
+   ============================================= */
+
+.correlation-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.section-heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-top: var(--space-lg);
+}
+
+.section-heading:first-of-type {
+  margin-top: 0;
+}
+
+.section-description {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.correlation-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.correlation-controls label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.correlation-controls select {
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-xs) var(--space-sm);
+  min-height: 2.5rem;
+}
+
+/* Breakdown bars */
+.correlation-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.breakdown-label {
+  flex-shrink: 0;
+  width: 8rem;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  text-align: right;
+}
+
+.breakdown-bar {
+  flex: 1;
+  height: 1.25rem;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.breakdown-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius);
+  transition: width var(--transition-fast);
+}
+
+.breakdown-stat {
+  flex-shrink: 0;
+  width: 5rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Hourly comparison */
+.correlation-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.comparison-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legend-swatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+}
+
+.legend-swatch--with {
+  background: var(--color-primary);
+}
+
+.legend-swatch--without {
+  background: var(--color-accent);
+}
+
+.comparison-hour {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.comparison-hour-label {
+  flex-shrink: 0;
+  width: 1.5rem;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.comparison-bars {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.comparison-bar {
+  height: 0.5rem;
+  border-radius: 2px;
+  transition: width var(--transition-fast);
+}
+
+.comparison-bar--with {
+  background: var(--color-primary);
+}
+
+.comparison-bar--without {
+  background: var(--color-accent);
+}
+
+/* =============================================
    Responsive
    ============================================= */
 
