@@ -1,6 +1,6 @@
 'use strict';
 
-const { getMovements } = typeof require !== 'undefined'
+var _storage = typeof require !== 'undefined'
   ? require('./storage.js')
   : window;
 
@@ -31,7 +31,7 @@ function renderWeek() {
   if (!grid) return;
 
   const days = _weekDays(_weekStart);
-  const movements = getMovements();
+  const movements = _storage.getMovements();
 
   grid.innerHTML = '';
 
