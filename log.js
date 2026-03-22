@@ -1,6 +1,6 @@
 'use strict';
 
-const { saveMovement, getMovements } = typeof require !== 'undefined'
+const storage = typeof require !== 'undefined'
   ? require('./storage.js')
   : window;
 
@@ -26,7 +26,7 @@ function handleSave() {
     flags[btn.dataset.flag] = btn.classList.contains('flag-toggle--active');
   });
 
-  saveMovement({ timestamp: timestamp.toISOString(), flags, notes: notesInput.value.trim() });
+  storage.saveMovement({ timestamp: timestamp.toISOString(), flags, notes: notesInput.value.trim() });
 
   // Reset form
   document.querySelectorAll('.flag-toggle').forEach((btn) => {
@@ -57,7 +57,7 @@ function renderRecentMovements() {
   const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
   const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).toISOString();
 
-  const movements = getMovements({ from: startOfDay, to: endOfDay });
+  const movements = storage.getMovements({ from: startOfDay, to: endOfDay });
 
   list.innerHTML = '';
 
