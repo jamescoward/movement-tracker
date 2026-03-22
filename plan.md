@@ -117,11 +117,11 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 - [x] Overlay flag frequency (e.g. show that post-meal kicks tend to cluster at certain times)
 - [x] The user draws their own conclusions — the app just presents the data
 
-#### Sprint 3.2 — Flag Correlation View
+#### Sprint 3.2 — Flag Correlation View ✅ COMPLETE
 
-- [ ] Simple breakdown: how often each flag is present when movements are logged
-- [ ] Side-by-side comparison (e.g. movements per hour on "just eaten" vs. not)
-- [ ] Purely observational — no "you should eat more" or similar suggestions
+- [x] Simple breakdown: how often each flag is present when movements are logged
+- [x] Side-by-side comparison (e.g. movements per hour on "just eaten" vs. not)
+- [x] Purely observational — no "you should eat more" or similar suggestions
 
 ---
 

@@ -18,6 +18,8 @@ const APP_SHELL = [
   './settings.html',
   './data-io.js',
   './settings.js',
+  './correlation.html',
+  './correlation.js',
   './manifest.json',
 ];
 
