@@ -8,6 +8,7 @@ const storage = typeof require !== 'undefined'
 
 function initLogForm() {
   _setTimeInputToNow();
+  _renderFlagToggles();
   _bindFlagToggles();
   document.getElementById('log-movement-btn').addEventListener('click', handleSave);
   renderRecentMovements();
@@ -111,6 +112,23 @@ function _setTimeInputToNow() {
   const hh = String(now.getHours()).padStart(2, '0');
   const mm = String(now.getMinutes()).padStart(2, '0');
   input.value = `${hh}:${mm}`;
+}
+
+function _renderFlagToggles() {
+  const grid = document.getElementById('flags-grid');
+  if (!grid) return;
+
+  const flags = storage.getCustomFlags();
+  grid.innerHTML = '';
+  flags.forEach((flag) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'flag-toggle';
+    btn.dataset.flag = flag.key;
+    btn.setAttribute('aria-pressed', 'false');
+    btn.textContent = flag.label;
+    grid.appendChild(btn);
+  });
 }
 
 function _bindFlagToggles() {

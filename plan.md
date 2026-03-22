@@ -135,11 +135,11 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 - [x] Import from JSON file (with validation and merge/overwrite options)
 - [x] CSV export for spreadsheet use
 
-#### Sprint 4.2 — Settings & Preferences
+#### Sprint 4.2 — Settings & Preferences ✅ COMPLETE
 
-- [ ] Customisable flag list (add/remove/rename flags)
-- [ ] Reminder notifications (if notification permission granted)
-- [ ] Dark/light mode toggle (both within the muted palette)
+- [x] Customisable flag list (add/remove/rename flags)
+- [x] Reminder notifications (if notification permission granted)
+- [x] Dark/light mode toggle (both within the muted palette)
 
 #### Sprint 4.3 — PWA Polish
 

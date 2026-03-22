@@ -85,7 +85,91 @@
     };
   }
 
-  var api = { saveMovement: saveMovement, getMovements: getMovements, deleteMovement: deleteMovement, exportData: exportData, importData: importData, checkStorageCapacity: checkStorageCapacity };
+  // ─── Custom flags ────────────────────────────────────────────────────────────
+
+  var FLAGS_KEY = 'movement_tracker_flags';
+  var DEFAULT_FLAGS = [
+    { key: 'justEaten', label: 'Just eaten' },
+    { key: 'crunchedUp', label: 'Crunched up' },
+    { key: 'listeningToMusic', label: 'Listening to music' },
+    { key: 'resting', label: 'Resting' },
+    { key: 'active', label: 'Active' },
+  ];
+
+  function getCustomFlags() {
+    try {
+      var raw = localStorage.getItem(FLAGS_KEY);
+      return raw ? JSON.parse(raw) : DEFAULT_FLAGS.slice();
+    } catch (_) {
+      return DEFAULT_FLAGS.slice();
+    }
+  }
+
+  function saveCustomFlags(flags) {
+    localStorage.setItem(FLAGS_KEY, JSON.stringify(flags));
+  }
+
+  function _toCamelCase(str) {
+    return str.trim().split(/\s+/).map(function (word, i) {
+      if (i === 0) return word.toLowerCase();
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join('');
+  }
+
+  function addCustomFlag(label) {
+    var flags = getCustomFlags();
+    var key = _toCamelCase(label);
+    flags.push({ key: key, label: label });
+    saveCustomFlags(flags);
+  }
+
+  function removeCustomFlag(key) {
+    var flags = getCustomFlags();
+    saveCustomFlags(flags.filter(function (f) { return f.key !== key; }));
+  }
+
+  function renameCustomFlag(key, newLabel) {
+    var flags = getCustomFlags();
+    flags.forEach(function (f) {
+      if (f.key === key) f.label = newLabel;
+    });
+    saveCustomFlags(flags);
+  }
+
+  // ─── Reminder settings ───────────────────────────────────────────────────────
+
+  var REMINDER_KEY = 'movement_tracker_reminders';
+
+  function getReminderSettings() {
+    try {
+      var raw = localStorage.getItem(REMINDER_KEY);
+      return raw ? JSON.parse(raw) : { enabled: false, time: '09:00' };
+    } catch (_) {
+      return { enabled: false, time: '09:00' };
+    }
+  }
+
+  function saveReminderSettings(settings) {
+    localStorage.setItem(REMINDER_KEY, JSON.stringify(settings));
+  }
+
+  // ─── Dark mode ───────────────────────────────────────────────────────────────
+
+  var DARK_MODE_KEY = 'movement_tracker_dark_mode';
+
+  function getDarkMode() {
+    try {
+      return localStorage.getItem(DARK_MODE_KEY) === 'true';
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function setDarkMode(enabled) {
+    localStorage.setItem(DARK_MODE_KEY, String(enabled));
+  }
+
+  var api = { saveMovement: saveMovement, getMovements: getMovements, deleteMovement: deleteMovement, exportData: exportData, importData: importData, checkStorageCapacity: checkStorageCapacity, getCustomFlags: getCustomFlags, saveCustomFlags: saveCustomFlags, addCustomFlag: addCustomFlag, removeCustomFlag: removeCustomFlag, renameCustomFlag: renameCustomFlag, getReminderSettings: getReminderSettings, saveReminderSettings: saveReminderSettings, getDarkMode: getDarkMode, setDarkMode: setDarkMode };
 
   if (typeof module !== 'undefined') {
     module.exports = api;
