@@ -76,6 +76,11 @@ describe('settings.html — Sprint 4.2 sections', () => {
     expect(toggle).not.toBeNull();
   });
 
+  test('dark mode toggle has aria-pressed attribute', () => {
+    const toggle = htmlDoc.getElementById('dark-mode-toggle');
+    expect(toggle.hasAttribute('aria-pressed')).toBe(true);
+  });
+
   test('loads settings.js script', () => {
     const scripts = Array.from(htmlDoc.querySelectorAll('script'));
     const hasSettingsScript = scripts.some((s) => s.getAttribute('src') === 'settings.js');
@@ -412,6 +417,43 @@ describe('Dark mode — UI toggle', () => {
     settings.initSettings();
     document.getElementById('dark-mode-toggle').click();
     expect(document.body.classList.contains('dark-mode')).toBe(true);
+  });
+
+  test('clicking dark mode toggle sets aria-pressed to true', () => {
+    settings.initSettings();
+    const btn = document.getElementById('dark-mode-toggle');
+    btn.click();
+    expect(btn.getAttribute('aria-pressed')).toBe('true');
+  });
+
+  test('clicking dark mode toggle twice sets aria-pressed back to false', () => {
+    settings.initSettings();
+    const btn = document.getElementById('dark-mode-toggle');
+    btn.click();
+    btn.click();
+    expect(btn.getAttribute('aria-pressed')).toBe('false');
+  });
+
+  test('initSettings sets aria-pressed to true when dark mode is already on', () => {
+    localStorage.clear();
+    jest.resetModules();
+
+    document.body.innerHTML = `
+      <ul id="custom-flags-list"></ul>
+      <input type="text" id="new-flag-input" />
+      <button id="add-flag-btn">Add flag</button>
+      <input type="checkbox" id="reminder-toggle" />
+      <input type="time" id="reminder-time" value="09:00" />
+      <button id="dark-mode-toggle" aria-pressed="false">Toggle dark mode</button>
+      <div id="save-toast" role="status" hidden></div>
+    `;
+
+    const st = require('../storage.js');
+    st.setDarkMode(true);
+    const s = require('../settings.js');
+    s.initSettings();
+
+    expect(document.getElementById('dark-mode-toggle').getAttribute('aria-pressed')).toBe('true');
   });
 
   test('clicking dark mode toggle twice removes dark-mode class', () => {

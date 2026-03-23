@@ -1,4 +1,4 @@
-const CACHE_NAME = 'movement-tracker-v7';
+const CACHE_NAME = 'movement-tracker-v8';
 
 // Use relative URLs so the SW works on any deployment path
 // (e.g. GitHub Pages at /repo-name/ or a custom domain at /)

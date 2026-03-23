@@ -4,17 +4,6 @@ var _storage = typeof require !== 'undefined'
   ? require('./storage.js')
   : window;
 
-// ─── Constants ──────────────────────────────────────────────────────────────
-
-var FLAG_KEYS = ['justEaten', 'crunchedUp', 'listeningToMusic', 'resting', 'active'];
-var FLAG_LABELS = {
-  justEaten: 'Just eaten',
-  crunchedUp: 'Crunched up',
-  listeningToMusic: 'Listening to music',
-  resting: 'Resting',
-  active: 'Active',
-};
-
 // ─── State ──────────────────────────────────────────────────────────────────
 
 var _selectedFlag = 'justEaten';
@@ -26,15 +15,16 @@ function getSelectedFlag() {
 }
 
 function computeFlagBreakdown(movements) {
+  var flags = _storage.getCustomFlags();
   var result = {};
   var total = movements.length;
 
-  FLAG_KEYS.forEach(function (key) {
+  flags.forEach(function (flag) {
     var count = 0;
     movements.forEach(function (m) {
-      if (m.flags && m.flags[key]) count++;
+      if (m.flags && m.flags[flag.key]) count++;
     });
-    result[key] = {
+    result[flag.key] = {
       count: count,
       percent: total > 0 ? Math.round((count / total) * 10000) / 100 : 0,
     };
@@ -62,7 +52,17 @@ function computeHourlyComparison(movements, flagKey) {
 function initCorrelation() {
   var select = document.getElementById('flag-select');
   if (select) {
-    _selectedFlag = select.value;
+    var flags = _storage.getCustomFlags();
+    select.innerHTML = '';
+    flags.forEach(function (flag) {
+      var option = document.createElement('option');
+      option.value = flag.key;
+      option.textContent = flag.label;
+      select.appendChild(option);
+    });
+    _selectedFlag = flags.length > 0 ? flags[0].key : _selectedFlag;
+    select.value = _selectedFlag;
+
     select.addEventListener('change', function (e) {
       _selectedFlag = e.target.value;
       _renderComparison();
@@ -90,15 +90,16 @@ function _renderBreakdown() {
     return;
   }
 
+  var flags = _storage.getCustomFlags();
   var breakdown = computeFlagBreakdown(movements);
 
-  FLAG_KEYS.forEach(function (key) {
+  flags.forEach(function (flag) {
     var item = document.createElement('div');
     item.className = 'breakdown-item';
 
     var label = document.createElement('span');
     label.className = 'breakdown-label';
-    label.textContent = FLAG_LABELS[key];
+    label.textContent = flag.label;
     item.appendChild(label);
 
     var barContainer = document.createElement('div');
@@ -106,13 +107,14 @@ function _renderBreakdown() {
 
     var fill = document.createElement('div');
     fill.className = 'breakdown-fill';
-    fill.style.width = breakdown[key].percent + '%';
+    var entry = breakdown[flag.key] || { count: 0, percent: 0 };
+    fill.style.width = entry.percent + '%';
     barContainer.appendChild(fill);
     item.appendChild(barContainer);
 
     var stat = document.createElement('span');
     stat.className = 'breakdown-stat';
-    stat.textContent = breakdown[key].count + ' (' + Math.round(breakdown[key].percent) + '%)';
+    stat.textContent = entry.count + ' (' + Math.round(entry.percent) + '%)';
     item.appendChild(stat);
 
     container.appendChild(item);
@@ -144,9 +146,13 @@ function _renderComparison() {
   var withSwatch = document.createElement('span');
   withSwatch.className = 'legend-swatch legend-swatch--with';
   legend.appendChild(withSwatch);
+  var flags = _storage.getCustomFlags();
+  var selectedFlagObj = flags.find(function (f) { return f.key === _selectedFlag; });
+  var selectedFlagLabel = selectedFlagObj ? selectedFlagObj.label : _selectedFlag;
+
   var withLabel = document.createElement('span');
   withLabel.className = 'legend-label';
-  withLabel.textContent = 'With ' + FLAG_LABELS[_selectedFlag].toLowerCase();
+  withLabel.textContent = 'With ' + selectedFlagLabel.toLowerCase();
   legend.appendChild(withLabel);
 
   var withoutSwatch = document.createElement('span');
