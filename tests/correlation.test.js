@@ -43,14 +43,10 @@ describe('correlation.html — structure', () => {
     expect(el.tagName.toLowerCase()).toBe('select');
   });
 
-  test('flag-select has options for all 5 flags', () => {
+  test('flag-select is empty in HTML (populated dynamically by JavaScript)', () => {
     const select = htmlDoc.getElementById('flag-select');
-    const options = Array.from(select.options).map((o) => o.value);
-    expect(options).toContain('justEaten');
-    expect(options).toContain('crunchedUp');
-    expect(options).toContain('listeningToMusic');
-    expect(options).toContain('resting');
-    expect(options).toContain('active');
+    expect(select).not.toBeNull();
+    expect(select.options.length).toBe(0);
   });
 
   test('includes correlation.js script', () => {
@@ -97,13 +93,7 @@ describe('correlation.js — module', () => {
     document.body.innerHTML = `
       <div id="correlation-breakdown"></div>
       <div id="correlation-comparison"></div>
-      <select id="flag-select">
-        <option value="justEaten">Just eaten</option>
-        <option value="crunchedUp">Crunched up</option>
-        <option value="listeningToMusic">Listening to music</option>
-        <option value="resting">Resting</option>
-        <option value="active">Active</option>
-      </select>
+      <select id="flag-select"></select>
     `;
 
     storage = require('../storage.js');
@@ -393,6 +383,53 @@ describe('correlation.js — module', () => {
       correlation.initCorrelation();
       const comparison = document.getElementById('correlation-comparison');
       expect(comparison.textContent).toMatch(/no\s*movements/i);
+    });
+  });
+
+  // ── custom flags ───────────────────────────────────────────────────────
+
+  describe('custom flags support', () => {
+    test('flag-select is populated with default flags on init', () => {
+      correlation.initCorrelation();
+      const select = document.getElementById('flag-select');
+      const options = Array.from(select.options).map((o) => o.value);
+      expect(options).toContain('justEaten');
+      expect(options).toContain('active');
+      expect(select.options.length).toBe(5);
+    });
+
+    test('flag-select uses custom flags when saved in storage', () => {
+      storage.saveCustomFlags([
+        { key: 'customA', label: 'Custom A' },
+        { key: 'customB', label: 'Custom B' },
+      ]);
+      correlation.initCorrelation();
+      const select = document.getElementById('flag-select');
+      const options = Array.from(select.options).map((o) => o.value);
+      expect(options).toEqual(['customA', 'customB']);
+      expect(select.options[0].text).toBe('Custom A');
+    });
+
+    test('breakdown renders custom flag labels', () => {
+      storage.saveCustomFlags([
+        { key: 'customA', label: 'Custom A' },
+      ]);
+      storage.saveMovement({
+        timestamp: new Date(2024, 5, 3, 9, 0).toISOString(),
+        flags: { customA: true },
+      });
+      correlation.initCorrelation();
+      const labels = document.querySelectorAll('.breakdown-label');
+      const texts = Array.from(labels).map((el) => el.textContent);
+      expect(texts.some((t) => t === 'Custom A')).toBe(true);
+    });
+
+    test('getSelectedFlag returns first custom flag key', () => {
+      storage.saveCustomFlags([
+        { key: 'myFlag', label: 'My Flag' },
+      ]);
+      correlation.initCorrelation();
+      expect(correlation.getSelectedFlag()).toBe('myFlag');
     });
   });
 

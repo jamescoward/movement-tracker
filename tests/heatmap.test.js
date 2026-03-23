@@ -130,7 +130,7 @@ describe('heatmap.js — module', () => {
       expect(rows.length).toBe(24);
     });
 
-    test('header has 7 day labels (Mon–Sun)', () => {
+    test('header row has day labels (Mon–Sun)', () => {
       heatmap.initHeatmap();
       const labels = document.querySelectorAll('.heatmap-day-label');
       expect(labels.length).toBe(7);
@@ -147,7 +147,7 @@ describe('heatmap.js — module', () => {
       });
     });
 
-    test('renders hour labels (00–23)', () => {
+    test('each row has a zero-padded hour label (00–23)', () => {
       heatmap.initHeatmap();
       const hourLabels = document.querySelectorAll('.heatmap-hour-label');
       expect(hourLabels.length).toBe(24);
@@ -189,9 +189,9 @@ describe('heatmap.js — module', () => {
       heatmap.initHeatmap();
 
       const rows = document.querySelectorAll('.heatmap-row');
-      // Hour 9 row, Monday cell (index 0)
+      // Hour 9, Monday (day index 0)
       const intensity9 = parseInt(rows[9].querySelectorAll('.heatmap-cell')[0].getAttribute('data-intensity'));
-      // Hour 14 row, Monday cell (index 0)
+      // Hour 14, Monday (day index 0)
       const intensity14 = parseInt(rows[14].querySelectorAll('.heatmap-cell')[0].getAttribute('data-intensity'));
       expect(intensity9).toBeGreaterThan(intensity14);
     });
@@ -205,7 +205,7 @@ describe('heatmap.js — module', () => {
       }
       heatmap.initHeatmap();
       const rows = document.querySelectorAll('.heatmap-row');
-      // Hour 9 row, Monday cell (index 0)
+      // Hour 9, Monday (day index 0)
       const hour9MondayCell = rows[9].querySelectorAll('.heatmap-cell')[0];
       const intensity = parseInt(hour9MondayCell.getAttribute('data-intensity'));
       expect(intensity).toBeLessThanOrEqual(4);
@@ -215,7 +215,7 @@ describe('heatmap.js — module', () => {
       storage.saveMovement({ timestamp: new Date(2024, 5, 3, 9, 30).toISOString() }); // Mon 9am
       heatmap.initHeatmap();
       const rows = document.querySelectorAll('.heatmap-row');
-      // Hour 9 row, Monday cell (index 0)
+      // Hour 9, Monday (day index 0)
       const hour9MondayCell = rows[9].querySelectorAll('.heatmap-cell')[0];
       const title = hour9MondayCell.getAttribute('title');
       expect(title).toBeTruthy();
@@ -287,9 +287,9 @@ describe('heatmap.js — module', () => {
       select.dispatchEvent(new Event('change'));
 
       const rows = document.querySelectorAll('.heatmap-row');
-      // Hour 9 row, Monday cell (index 0): only 1 movement has justEaten=true
+      // Hour 9, Monday (day index 0): only 1 movement has justEaten=true
       expect(rows[9].querySelectorAll('.heatmap-cell')[0].getAttribute('title')).toContain('1');
-      // Hour 10 row, Monday cell (index 0): 1 movement has justEaten=true
+      // Hour 10, Monday (day index 0): 1 movement has justEaten=true
       expect(rows[10].querySelectorAll('.heatmap-cell')[0].getAttribute('title')).toContain('1');
     });
 
@@ -304,7 +304,7 @@ describe('heatmap.js — module', () => {
       select.dispatchEvent(new Event('change'));
 
       const rows = document.querySelectorAll('.heatmap-row');
-      // Hour 9 row, Monday cell (index 0)
+      // Hour 9, Monday (day index 0): 2 movements
       expect(rows[9].querySelectorAll('.heatmap-cell')[0].getAttribute('title')).toContain('2');
     });
 

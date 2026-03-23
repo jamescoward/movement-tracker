@@ -60,6 +60,9 @@ function renderRecentMovements() {
 
   const movements = storage.getMovements({ from: startOfDay, to: endOfDay });
 
+  const flagLabelMap = {};
+  storage.getCustomFlags().forEach((f) => { flagLabelMap[f.key] = f.label; });
+
   list.innerHTML = '';
 
   if (movements.length === 0) {
@@ -83,7 +86,7 @@ function renderRecentMovements() {
 
     const activeFlags = Object.entries(m.flags)
       .filter(([, v]) => v)
-      .map(([k]) => k);
+      .map(([k]) => flagLabelMap[k] || k);
 
     if (activeFlags.length > 0) {
       const flagSpan = document.createElement('span');
