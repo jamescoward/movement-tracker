@@ -5,13 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Track your baby's movements and build a personal baseline throughout pregnancy." />
   <meta name="theme-color" content="#7a9e87" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
   <title>Baby Movement Tracker</title>
 
   <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <div class="splash-screen" id="splash-screen" aria-hidden="true">
+    <img src="icons/icon-192.png" alt="" width="80" height="80" />
+    <span>Movement Tracker</span>
+  </div>
 
   <header>
     <h1>Movement Tracker</h1>
@@ -40,7 +48,11 @@
 
     </section>
 
-    <div id="save-toast" class="toast" role="status" aria-live="polite" hidden>Movement logged</div>
+    <div id="offline-banner" class="offline-banner" role="status" aria-live="polite" hidden>
+    You are offline — data is saved locally
+  </div>
+
+  <div id="save-toast" class="toast" role="status" aria-live="polite" hidden>Movement logged</div>
 
     <section class="recent-section" aria-label="Recent movements">
       <h2>Today</h2>
@@ -48,6 +60,10 @@
     </section>
 
   </main>
+
+  <button type="button" id="install-btn" class="install-btn" hidden>
+    Install App
+  </button>
 
   <nav aria-label="Main navigation">
     <a href="./" aria-current="page">

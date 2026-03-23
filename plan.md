@@ -141,13 +141,13 @@ Each sprint is scoped so a single agent can pick it up independently. Sprints wi
 - [x] Reminder notifications (if notification permission granted)
 - [x] Dark/light mode toggle (both within the muted palette)
 
-#### Sprint 4.3 — PWA Polish
+#### Sprint 4.3 — PWA Polish ✅ COMPLETE
 
-- [ ] Proper app icons (multiple sizes)
-- [ ] Splash screen
-- [ ] Offline-first UX messaging
-- [ ] Install prompt handling
-- [ ] Lighthouse audit pass (PWA, accessibility, performance)
+- [x] Proper app icons (multiple sizes)
+- [x] Splash screen
+- [x] Offline-first UX messaging
+- [x] Install prompt handling
+- [x] Lighthouse audit pass (PWA, accessibility, performance)
 
 ---
 
