@@ -42,33 +42,32 @@ function renderHeatmap() {
 
   grid.innerHTML = '';
 
-  // Hour labels header row
+  // Day labels header row (sticky)
+  const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   const headerRow = document.createElement('div');
   headerRow.className = 'heatmap-header-row';
   const cornerCell = document.createElement('div');
   cornerCell.className = 'heatmap-corner';
-  cornerCell.textContent = '';
   headerRow.appendChild(cornerCell);
-  for (let h = 0; h < 24; h++) {
+  for (let d = 0; d < 7; d++) {
     const label = document.createElement('span');
-    label.className = 'heatmap-hour-label';
-    label.textContent = String(h);
+    label.className = 'heatmap-day-label';
+    label.textContent = dayNames[d];
     headerRow.appendChild(label);
   }
   grid.appendChild(headerRow);
 
-  // Day rows
-  const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  for (let d = 0; d < 7; d++) {
+  // Hour rows (24 rows, one per hour)
+  for (let h = 0; h < 24; h++) {
     const row = document.createElement('div');
     row.className = 'heatmap-row';
 
-    const dayLabel = document.createElement('span');
-    dayLabel.className = 'heatmap-day-label';
-    dayLabel.textContent = dayNames[d];
-    row.appendChild(dayLabel);
+    const hourLabel = document.createElement('span');
+    hourLabel.className = 'heatmap-hour-label';
+    hourLabel.textContent = String(h).padStart(2, '0');
+    row.appendChild(hourLabel);
 
-    for (let h = 0; h < 24; h++) {
+    for (let d = 0; d < 7; d++) {
       const cell = document.createElement('div');
       cell.className = 'heatmap-cell';
       const count = matrix[d][h];
