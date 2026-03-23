@@ -14,7 +14,7 @@ This app uses a cache-first service worker (`sw.js`). When deploying changes to 
 
 ```js
 // sw.js
-const CACHE_NAME = 'movement-tracker-v8'; // increment this on each deploy
+const CACHE_NAME = 'movement-tracker-vN'; // increment N on each deploy
 ```
 
 The browser always fetches `sw.js` fresh from the network, so changing the version string is enough to trigger cache invalidation for all users.
