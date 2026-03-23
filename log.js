@@ -7,7 +7,6 @@ const storage = typeof require !== 'undefined'
 // ─── Public API ───────────────────────────────────────────────────────────────
 
 function initLogForm() {
-  _setTimeInputToNow();
   _renderFlagToggles();
   _bindFlagToggles();
   document.getElementById('log-movement-btn').addEventListener('click', handleSave);
@@ -15,12 +14,9 @@ function initLogForm() {
 }
 
 function handleSave() {
-  const timeInput = document.getElementById('movement-time');
   const notesInput = document.getElementById('movement-notes');
 
-  const [hours, minutes] = timeInput.value.split(':').map(Number);
   const timestamp = new Date();
-  timestamp.setHours(hours, minutes, 0, 0);
 
   const flags = {};
   document.querySelectorAll('.flag-toggle').forEach((btn) => {
@@ -29,11 +25,7 @@ function handleSave() {
 
   storage.saveMovement({ timestamp: timestamp.toISOString(), flags, notes: notesInput.value.trim() });
 
-  // Reset form
-  document.querySelectorAll('.flag-toggle').forEach((btn) => {
-    btn.classList.remove('flag-toggle--active');
-    btn.setAttribute('aria-pressed', 'false');
-  });
+  // Reset notes only; flags persist so rapid repeated logging keeps the same context
   notesInput.value = '';
 
   showToast('Movement logged');
@@ -107,15 +99,6 @@ function renderRecentMovements() {
 }
 
 // ─── Private helpers ──────────────────────────────────────────────────────────
-
-function _setTimeInputToNow() {
-  const input = document.getElementById('movement-time');
-  if (!input) return;
-  const now = new Date();
-  const hh = String(now.getHours()).padStart(2, '0');
-  const mm = String(now.getMinutes()).padStart(2, '0');
-  input.value = `${hh}:${mm}`;
-}
 
 function _renderFlagToggles() {
   const grid = document.getElementById('flags-grid');

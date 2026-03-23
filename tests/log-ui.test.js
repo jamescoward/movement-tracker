@@ -32,12 +32,6 @@ describe('index.html — logging UI structure', () => {
     expect(htmlDoc.getElementById('log-movement-btn').tagName.toLowerCase()).toBe('button');
   });
 
-  test('has a time input #movement-time', () => {
-    const el = htmlDoc.getElementById('movement-time');
-    expect(el).not.toBeNull();
-    expect(el.getAttribute('type')).toBe('time');
-  });
-
   test('has a flags-grid container for dynamic flag rendering', () => {
     const grid = htmlDoc.getElementById('flags-grid');
     expect(grid).not.toBeNull();
@@ -84,7 +78,6 @@ describe('log.js — module', () => {
 
     // Minimal DOM fixture matching what index.html will provide
     document.body.innerHTML = `
-      <input type="time" id="movement-time" />
       <fieldset class="flags-group">
         <div class="flags-grid">
           <button class="flag-toggle" data-flag="justEaten" aria-pressed="false">Just eaten</button>
@@ -111,18 +104,6 @@ describe('log.js — module', () => {
   // ── initLogForm() ────────────────────────────────────────────────────────
 
   describe('initLogForm()', () => {
-    test('sets the time input to the current HH:MM', () => {
-      jest.setSystemTime(new Date(2024, 0, 15, 14, 30)); // 14:30
-      log.initLogForm();
-      expect(document.getElementById('movement-time').value).toBe('14:30');
-    });
-
-    test('pads single-digit hours and minutes', () => {
-      jest.setSystemTime(new Date(2024, 0, 15, 9, 5)); // 09:05
-      log.initLogForm();
-      expect(document.getElementById('movement-time').value).toBe('09:05');
-    });
-
     test('clicking a flag toggle adds flag-toggle--active class', () => {
       log.initLogForm();
       const btn = document.querySelector('[data-flag="justEaten"]');
@@ -161,7 +142,6 @@ describe('log.js — module', () => {
 
     test('clicking #log-movement-btn triggers a save', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '12:00';
       document.getElementById('log-movement-btn').click();
       expect(storage.getMovements().length).toBe(1);
     });
@@ -172,14 +152,12 @@ describe('log.js — module', () => {
   describe('handleSave()', () => {
     test('saves a movement to storage', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '10:00';
       log.handleSave();
       expect(storage.getMovements().length).toBe(1);
     });
 
     test('saved record has correct flags when none are toggled', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '10:00';
       log.handleSave();
       const [record] = storage.getMovements();
       expect(record.flags.justEaten).toBe(false);
@@ -188,7 +166,6 @@ describe('log.js — module', () => {
 
     test('saved record reflects toggled flags', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '10:00';
       document.querySelector('[data-flag="justEaten"]').click();
       document.querySelector('[data-flag="resting"]').click();
       log.handleSave();
@@ -200,27 +177,23 @@ describe('log.js — module', () => {
 
     test('saved record includes notes text', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '10:00';
       document.getElementById('movement-notes').value = 'Strong kick after lunch';
       log.handleSave();
       const [record] = storage.getMovements();
       expect(record.notes).toBe('Strong kick after lunch');
     });
 
-    test('resets all flag toggles after save', () => {
+    test('flag toggles persist their state after save', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '10:00';
       document.querySelector('[data-flag="justEaten"]').click();
       log.handleSave();
-      document.querySelectorAll('.flag-toggle').forEach((btn) => {
-        expect(btn.classList.contains('flag-toggle--active')).toBe(false);
-        expect(btn.getAttribute('aria-pressed')).toBe('false');
-      });
+      const btn = document.querySelector('[data-flag="justEaten"]');
+      expect(btn.classList.contains('flag-toggle--active')).toBe(true);
+      expect(btn.getAttribute('aria-pressed')).toBe('true');
     });
 
     test('clears notes textarea after save', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '10:00';
       document.getElementById('movement-notes').value = 'test note';
       log.handleSave();
       expect(document.getElementById('movement-notes').value).toBe('');
@@ -228,14 +201,12 @@ describe('log.js — module', () => {
 
     test('shows the toast after save', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '10:00';
       log.handleSave();
       expect(document.getElementById('save-toast').hidden).toBe(false);
     });
 
     test('re-renders recent movements after save', () => {
       log.initLogForm();
-      document.getElementById('movement-time').value = '10:00';
       log.handleSave();
       const items = document.querySelectorAll('.movement-item');
       expect(items.length).toBe(1);

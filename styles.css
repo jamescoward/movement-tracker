@@ -141,31 +141,6 @@ nav a[aria-current="page"] {
   gap: var(--space-lg);
 }
 
-/* Timestamp */
-.timestamp-group {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-}
-
-.timestamp-group label {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  white-space: nowrap;
-}
-
-#movement-time {
-  flex: 1;
-  font-size: 1.5rem;
-  font-weight: 600;
-  font-family: inherit;
-  color: var(--color-text);
-  background: var(--color-surface);
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: var(--space-xs) var(--space-sm);
-}
-
 /* Flag toggles */
 .flags-group {
   border: none;
