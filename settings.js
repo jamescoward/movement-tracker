@@ -96,15 +96,18 @@ function _initDarkMode() {
   var btn = document.getElementById('dark-mode-toggle');
   if (!btn) return;
 
-  if (storage.getDarkMode()) {
+  var isDark = storage.getDarkMode();
+  if (isDark) {
     document.body.classList.add('dark-mode');
   } else {
     document.body.classList.remove('dark-mode');
   }
+  btn.setAttribute('aria-pressed', String(isDark));
 
   btn.addEventListener('click', function () {
     var isDark = document.body.classList.toggle('dark-mode');
     storage.setDarkMode(isDark);
+    btn.setAttribute('aria-pressed', String(isDark));
   });
 }
 
