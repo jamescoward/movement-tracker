@@ -41,7 +41,12 @@ function updateConnectionStatus() {
 
 function hideSplashScreen() {
   var splash = document.getElementById('splash-screen');
-  if (!splash) return;
+  if (!splash) {
+    // No splash on this page — mark session as started so the log page
+    // won't show the splash if navigated to later.
+    sessionStorage.setItem('splashShown', '1');
+    return;
+  }
   if (sessionStorage.getItem('splashShown')) {
     splash.remove();
     return;
