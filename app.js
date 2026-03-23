@@ -11,10 +11,19 @@ if ('serviceWorker' in navigator) {
 
 // App initialisation
 window.addEventListener('DOMContentLoaded', () => {
+  applyDarkMode();
   highlightCurrentNav();
   hideSplashScreen();
   updateConnectionStatus();
 });
+
+function applyDarkMode() {
+  try {
+    if (localStorage.getItem('movement_tracker_dark_mode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  } catch (_) {}
+}
 
 // Offline-first UX: show/hide banner on connectivity changes
 window.addEventListener('online', updateConnectionStatus);
@@ -32,10 +41,11 @@ function updateConnectionStatus() {
 
 function hideSplashScreen() {
   var splash = document.getElementById('splash-screen');
-  if (splash) {
+  if (!splash) return;
+  setTimeout(function() {
     splash.classList.add('hidden');
     setTimeout(function() { splash.remove(); }, 400);
-  }
+  }, 1500);
 }
 
 // Install prompt handling
