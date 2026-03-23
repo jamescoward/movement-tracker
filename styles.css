@@ -1101,6 +1101,89 @@ nav a[aria-current="page"] {
   padding: var(--space-xs) var(--space-sm);
 }
 
+/* =============================================
+   Install Button (Sprint 4.3)
+   ============================================= */
+
+.install-btn {
+  position: fixed;
+  bottom: calc(var(--nav-height) + var(--space-lg));
+  right: var(--space-md);
+  z-index: 150;
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  min-height: 44px;
+  transition: background var(--transition-fast), opacity var(--transition-fast);
+}
+
+.install-btn:active {
+  background: var(--color-primary-dark);
+}
+
+.install-btn[hidden] {
+  display: none;
+}
+
+/* =============================================
+   Offline Banner (Sprint 4.3)
+   ============================================= */
+
+.offline-banner {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  z-index: 150;
+  text-align: center;
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-teal);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  animation: toast-in 0.2s ease;
+}
+
+.offline-banner[hidden] {
+  display: none;
+}
+
+/* =============================================
+   Splash Screen (Sprint 4.3)
+   ============================================= */
+
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  background-color: var(--color-bg);
+  transition: opacity 0.3s ease;
+}
+
+.splash-screen span {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.02em;
+}
+
+.splash-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 @media (min-width: 900px) {
   nav {
     /* On wider screens nav could move to a sidebar in future sprints */

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'movement-tracker-v5';
+const CACHE_NAME = 'movement-tracker-v6';
 
 // Use relative URLs so the SW works on any deployment path
 // (e.g. GitHub Pages at /repo-name/ or a custom domain at /)
@@ -58,6 +58,12 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
         return response;
+      }).catch(() => {
+        // Offline fallback: return a basic offline response for navigation requests
+        if (event.request.mode === 'navigate') {
+          return caches.match('./index.html');
+        }
+        return new Response('', { status: 503, statusText: 'Offline' });
       });
     })
   );
