@@ -42,6 +42,11 @@ function updateConnectionStatus() {
 function hideSplashScreen() {
   var splash = document.getElementById('splash-screen');
   if (!splash) return;
+  if (sessionStorage.getItem('splashShown')) {
+    splash.remove();
+    return;
+  }
+  sessionStorage.setItem('splashShown', '1');
   setTimeout(function() {
     splash.classList.add('hidden');
     setTimeout(function() { splash.remove(); }, 400);
