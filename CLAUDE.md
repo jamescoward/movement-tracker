@@ -1,12 +1,20 @@
 # CLAUDE.md — Developer Notes
 
+## Before committing
+
+Always run the test suite before committing and fix any failures before pushing:
+
+```bash
+npm test
+```
+
 ## Service worker cache versioning
 
 This app uses a cache-first service worker (`sw.js`). When deploying changes to any cached file, **bump the cache version** in `sw.js` or existing users will continue receiving stale cached files indefinitely.
 
 ```js
 // sw.js
-const CACHE_NAME = 'movement-tracker-v7'; // increment this on each deploy
+const CACHE_NAME = 'movement-tracker-v8'; // increment this on each deploy
 ```
 
 The browser always fetches `sw.js` fresh from the network, so changing the version string is enough to trigger cache invalidation for all users.
